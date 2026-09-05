@@ -21,3 +21,6 @@ class Job (models.Model):
 
     error_messages = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.email} - {self.status}"
+

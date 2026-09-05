@@ -10,3 +10,6 @@ class Job (models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
 
     # adding time stamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    started_at = models.DateTimeField(null = True, blank = True)
+    completed_at = models.DateTimeField(null = True, blank = True)

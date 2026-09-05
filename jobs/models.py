@@ -5,6 +5,7 @@ from django.db import models
 class Job (models.Model):
     STATUS_CHOICES = [
         ('PENDING', 'pending'),
+        ('PROCESSING', 'processing'),
         ('SUCCESS', 'success'),
         ('FAILURE', 'failure'),
     ]
@@ -16,7 +17,7 @@ class Job (models.Model):
     completed_at = models.DateTimeField(null = True, blank = True)
 
     # defining the uuid, email and error message fileds
-    celery_task_id = models.CharField(max_length=255)
+    celery_task_id = models.CharField(max_length=255, null=True, blank=True)
     email = models.EmailField()
 
     error_messages = models.TextField(null=True, blank=True)

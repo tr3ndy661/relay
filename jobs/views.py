@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from celery.result import AsyncResult
 from .tasks import send_welcome_email
 from .models import Job 
+import json
 
 # Create your views here.
 def send_email_to_user (request, user_email):
@@ -20,4 +21,9 @@ def send_email_to_user (request, user_email):
 
 def check_task_status (request, task_id):
     result = AsyncResult(task_id)
-    return HttpResponse (f"Status: {result.status}, Result: {result.result}")
+    response_data = {
+        'status': result.status,
+        'result': str(result.result),
+    }
+    # return HttpResponse (f"Status: {result.status}, Result: {result.result}")
+    return JsonResponse (response_data)

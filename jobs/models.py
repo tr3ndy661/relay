@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Job (models.Model):
     STATUS_CHOICES = [
@@ -13,3 +14,10 @@ class Job (models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     started_at = models.DateTimeField(null = True, blank = True)
     completed_at = models.DateTimeField(null = True, blank = True)
+
+    # defining the uuid, email and error message fileds
+    celery_task_id = models.CharField(max_length=255)
+    email = models.EmailField()
+
+    error_messages = models.TextField(null=True, blank=True)
+

@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from jobs.views import check_task_status, send_email_to_user
+from jobs.views import check_task_status, send_email_to_user, list_jobs
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('send-email/<str:user_email>/', send_email_to_user),
     path('check-status/<str:task_id>/', check_task_status, name='check_status'),
+    path('jobs/', list_jobs, name='list_jobs'),
 ]

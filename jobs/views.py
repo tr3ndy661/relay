@@ -47,6 +47,7 @@ def list_jobs (request):
             'completed_at': job.completed_at,
             'email': job.email,
             'error_messages': job.error_messages,
+            'status': job.status,
         })
 
     return JsonResponse (jobs_list, safe=False)

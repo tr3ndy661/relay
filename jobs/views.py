@@ -34,3 +34,19 @@ def check_task_status (request, task_id):
     }
     # return HttpResponse (f"Status: {result.status}, Result: {result.result}")
     return JsonResponse (response_data)
+
+# listing all jobs view
+def list_jobs (request):
+    jobs = Job.objects.all()
+    jobs_list = []
+    for job in jobs:
+        jobs_list.append({
+            'id': job.id,
+            'created_at': job.created_at,
+            'started_at': job.started_at,
+            'completed_at': job.completed_at,
+            'email': job.email,
+            'error_messages': job.error_messages,
+        })
+
+    return JsonResponse (jobs_list, safe=False)

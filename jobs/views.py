@@ -17,7 +17,14 @@ def send_email_to_user (request, user_email):
     new_job.celery_task_id = task_result.id
     new_job.save()
 
-    return HttpResponse(f"Job queued! Task ID: {task_result.id}")
+    response_data = {
+        'job_id' : new_job.id,
+        'task_id' : task_result.id,
+        'email' : user_email,
+    }
+
+    # return HttpResponse(f"Job queued! Task ID: {task_result.id}")
+    return JsonResponse(response_data)
 
 def check_task_status (request, task_id):
     result = AsyncResult(task_id)
